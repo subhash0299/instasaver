@@ -30,7 +30,7 @@ const features = [
 
 export function FeaturesSection() {
   return (
-    <section className="py-20 px-4 bg-white/30 dark:bg-gray-900/30 backdrop-blur-sm">
+    <section className="py-20 px-4 bg-white/30 dark:bg-slate-950/40 backdrop-blur-md">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -42,7 +42,7 @@ export function FeaturesSection() {
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-800 dark:text-gray-100">
             Why Choose InstaSave Pro?
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 dark:text-zinc-200 max-w-2xl mx-auto">
             Experience the fastest and most reliable Instagram downloader with premium features
           </p>
         </motion.div>
@@ -58,14 +58,14 @@ export function FeaturesSection() {
               whileHover={{ y: -5 }}
               className="group"
             >
-              <div className="h-full p-6 bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg rounded-2xl shadow-lg border border-gray-200/50 dark:border-gray-700/50 hover:shadow-2xl transition-all duration-300">
+              <div className="h-full p-6 bg-white/80 dark:bg-zinc-900/90 backdrop-blur-lg rounded-2xl shadow-lg dark:shadow-black/30 border border-gray-200/50 dark:border-zinc-600/60 dark:ring-1 dark:ring-white/5 hover:shadow-2xl transition-all duration-300">
                 <div className={`inline-flex items-center justify-center w-14 h-14 mb-4 rounded-xl bg-gradient-to-br ${feature.color} shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                   <feature.icon className="w-7 h-7 text-white" />
                 </div>
                 <h3 className="text-xl font-bold mb-2 text-gray-800 dark:text-gray-100">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                <p className="text-gray-600 dark:text-zinc-300 leading-relaxed">
                   {feature.description}
                 </p>
               </div>

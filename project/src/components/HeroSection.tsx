@@ -82,7 +82,7 @@ export function HeroSection({ onSubmit, isLoading, fetchError, onClearFetchError
             Download Instagram Posts Instantly
           </h1>
 
-          <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto">
+          <p className="text-xl md:text-2xl text-gray-600 dark:text-zinc-200 mb-12 max-w-2xl mx-auto">
             Paste your Instagram link and download photos, videos, and reels in seconds.
           </p>
 
@@ -94,8 +94,8 @@ export function HeroSection({ onSubmit, isLoading, fetchError, onClearFetchError
             className="max-w-3xl mx-auto"
           >
             <div className="relative">
-              <div className="flex flex-col md:flex-row gap-3 md:gap-4 p-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg rounded-2xl shadow-2xl border border-gray-200/50 dark:border-gray-700/50">
-                <div className="relative flex flex-1 items-center min-w-0">
+              <div className="flex flex-col md:flex-row gap-3 md:gap-4 p-2 md:p-2.5 bg-white/85 dark:bg-zinc-900/95 backdrop-blur-xl rounded-2xl shadow-2xl dark:shadow-black/50 border border-gray-200/60 dark:border-zinc-600/70 dark:ring-1 dark:ring-white/10">
+                <div className="relative flex flex-1 items-center min-w-0 rounded-xl dark:bg-zinc-950/50">
                   <input
                     type="text"
                     value={url}
@@ -105,14 +105,14 @@ export function HeroSection({ onSubmit, isLoading, fetchError, onClearFetchError
                       onClearFetchError?.();
                     }}
                     placeholder="Paste Instagram URL here..."
-                    className={`w-full py-4 bg-transparent text-gray-800 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 outline-none text-lg rounded-xl pl-6 ${url.trim() && !isLoading ? 'pr-12' : 'pr-6'}`}
+                    className={`w-full py-4 bg-transparent text-gray-900 dark:text-zinc-50 placeholder:text-gray-400 dark:placeholder:text-zinc-400 outline-none text-lg rounded-xl pl-6 ${url.trim() && !isLoading ? 'pr-12' : 'pr-6'}`}
                     disabled={isLoading}
                   />
                   {url.trim() && !isLoading && (
                     <button
                       type="button"
                       onClick={clearUrl}
-                      className="absolute right-2 p-2 rounded-lg text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-100 hover:bg-gray-200/80 dark:hover:bg-gray-700/80 transition-colors"
+                      className="absolute right-2 p-2 rounded-lg text-gray-500 hover:text-gray-800 dark:text-zinc-400 dark:hover:text-white hover:bg-gray-200/80 dark:hover:bg-zinc-700 transition-colors"
                       aria-label="Clear URL"
                       title="Clear"
                     >
@@ -127,7 +127,7 @@ export function HeroSection({ onSubmit, isLoading, fetchError, onClearFetchError
                     onClick={pasteFromClipboard}
                     whileHover={{ scale: isLoading ? 1 : 1.02 }}
                     whileTap={{ scale: isLoading ? 1 : 0.98 }}
-                    className="flex-1 md:flex-none px-5 py-4 rounded-xl font-semibold border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 bg-white/60 dark:bg-gray-800/60 hover:bg-gray-100 dark:hover:bg-gray-700/80 hover:border-gray-400 dark:hover:border-gray-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 min-w-0 md:min-w-[120px]"
+                    className="flex-1 md:flex-none px-5 py-4 rounded-xl font-semibold border-2 border-gray-300 dark:border-zinc-500 text-gray-700 dark:text-zinc-100 bg-white/60 dark:bg-zinc-800 hover:bg-gray-100 dark:hover:bg-zinc-700 hover:border-gray-400 dark:hover:border-zinc-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 min-w-0 md:min-w-[120px]"
                     aria-label="Paste from clipboard"
                     title="Paste from clipboard"
                   >
@@ -139,7 +139,7 @@ export function HeroSection({ onSubmit, isLoading, fetchError, onClearFetchError
                     disabled={isLoading}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="flex-1 md:flex-none px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-xl shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 min-w-[140px]"
+                    className="flex-1 md:flex-none px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-semibold rounded-xl shadow-lg dark:shadow-purple-900/40 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 min-w-[140px]"
                   >
                     {isLoading ? (
                       <>
@@ -161,7 +161,7 @@ export function HeroSection({ onSubmit, isLoading, fetchError, onClearFetchError
               <motion.p
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mt-4 text-red-500 dark:text-red-400 text-sm font-medium"
+                className="mt-4 text-sm font-medium text-red-600 dark:text-rose-300 dark:drop-shadow-[0_0_12px_rgba(251,113,133,0.25)]"
               >
                 {error || fetchError}
               </motion.p>
@@ -172,9 +172,12 @@ export function HeroSection({ onSubmit, isLoading, fetchError, onClearFetchError
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="mt-8 text-sm text-gray-500 dark:text-gray-400"
+            className="mt-8 text-sm text-gray-500 dark:text-zinc-300"
           >
-            Example: https://www.instagram.com/p/ABC123xyz/
+            Example:{' '}
+            <span className="font-mono text-[0.8125rem] sm:text-sm text-gray-600 dark:text-zinc-200 break-all">
+              https://www.instagram.com/p/ABC123xyz/
+            </span>
           </motion.p>
         </motion.div>
       </div>

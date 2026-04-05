@@ -38,12 +38,12 @@ export function ResultSection({ result, onClose }: ResultSectionProps) {
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.4 }}
-          className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg rounded-3xl shadow-2xl border border-gray-200/50 dark:border-gray-700/50 overflow-hidden"
+          className="bg-white/80 dark:bg-zinc-900/95 backdrop-blur-lg rounded-3xl shadow-2xl dark:shadow-black/40 border border-gray-200/50 dark:border-zinc-600/60 dark:ring-1 dark:ring-white/10 overflow-hidden"
         >
           <div className="relative">
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 z-10 p-2 bg-white/90 dark:bg-gray-800/90 rounded-full shadow-lg hover:bg-white dark:hover:bg-gray-700 transition-colors"
+              className="absolute top-4 right-4 z-10 p-2 bg-white/90 dark:bg-zinc-800 rounded-full shadow-lg border border-gray-200/80 dark:border-zinc-600 hover:bg-white dark:hover:bg-zinc-700 transition-colors"
             >
               <X className="w-5 h-5 text-gray-700 dark:text-gray-300" />
             </button>
@@ -61,7 +61,7 @@ export function ResultSection({ result, onClose }: ResultSectionProps) {
               </div>
 
               <div className="grid md:grid-cols-2 gap-6 mb-6">
-                <div className="relative group overflow-hidden rounded-2xl aspect-square bg-gray-200 dark:bg-gray-700">
+                <div className="relative group overflow-hidden rounded-2xl aspect-square bg-gray-200 dark:bg-zinc-800 ring-1 ring-black/5 dark:ring-white/10">
                   {result.type === 'image' ? (
                     <img
                       src={result.url}
@@ -82,19 +82,19 @@ export function ResultSection({ result, onClose }: ResultSectionProps) {
 
                 <div className="flex flex-col justify-center gap-4">
                   <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">
+                    <p className="text-sm text-gray-500 dark:text-zinc-400 mb-1">
                       Posted by
                     </p>
-                    <p className="text-lg font-semibold text-gray-800 dark:text-gray-100">
+                    <p className="text-lg font-semibold text-gray-800 dark:text-zinc-50">
                       @{result.username}
                     </p>
                   </div>
 
                   <div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">
+                    <p className="text-sm text-gray-500 dark:text-zinc-400 mb-1">
                       Caption
                     </p>
-                    <p className="text-gray-700 dark:text-gray-300 line-clamp-3">
+                    <p className="text-gray-700 dark:text-zinc-200 line-clamp-3">
                       {result.caption || 'No caption'}
                     </p>
                   </div>
@@ -110,7 +110,7 @@ export function ResultSection({ result, onClose }: ResultSectionProps) {
                       Download {result.type === 'image' ? 'Image' : 'Video'}
                     </motion.button>
 
-                    <p className="text-xs text-center text-gray-500 dark:text-gray-400">
+                    <p className="text-xs text-center text-gray-500 dark:text-zinc-400">
                       Click to save to your device
                     </p>
                   </div>

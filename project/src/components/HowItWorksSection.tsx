@@ -36,7 +36,7 @@ export function HowItWorksSection() {
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-800 dark:text-gray-100">
             How It Works
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 dark:text-zinc-200 max-w-2xl mx-auto">
             Three simple steps to download any Instagram content in seconds
           </p>
         </motion.div>
@@ -65,7 +65,7 @@ export function HowItWorksSection() {
                   <div className="relative w-24 h-24 bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl flex items-center justify-center shadow-xl">
                     <step.icon className="w-10 h-10 text-white" />
                   </div>
-                  <div className="absolute -top-2 -right-2 w-12 h-12 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center shadow-lg border-4 border-gray-100 dark:border-gray-700">
+                  <div className="absolute -top-2 -right-2 w-12 h-12 bg-white dark:bg-zinc-800 rounded-full flex items-center justify-center shadow-lg border-4 border-gray-100 dark:border-zinc-600">
                     <span className="text-sm font-bold bg-gradient-to-br from-purple-600 to-pink-600 bg-clip-text text-transparent">
                       {step.number}
                     </span>
@@ -75,7 +75,7 @@ export function HowItWorksSection() {
                 <h3 className="text-2xl font-bold mb-3 text-gray-800 dark:text-gray-100">
                   {step.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed max-w-xs mx-auto">
+                <p className="text-gray-600 dark:text-zinc-300 leading-relaxed max-w-xs mx-auto">
                   {step.description}
                 </p>
               </div>
