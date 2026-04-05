@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Download, Loader2 } from 'lucide-react';
+import { ClipboardPaste, Download, Loader2, X } from 'lucide-react';
 
 interface HeroSectionProps {
   onSubmit: (url: string) => void;
   isLoading: boolean;
+  fetchError?: string | null;
+  onClearFetchError?: () => void;
 }
 
-export function HeroSection({ onSubmit, isLoading }: HeroSectionProps) {
+export function HeroSection({ onSubmit, isLoading, fetchError, onClearFetchError }: HeroSectionProps) {
   const [url, setUrl] = useState('');
   const [error, setError] = useState('');
 
@@ -31,6 +33,31 @@ export function HeroSection({ onSubmit, isLoading }: HeroSectionProps) {
     }
 
     onSubmit(url);
+  };
+
+  const clearUrl = () => {
+    setUrl('');
+    setError('');
+    onClearFetchError?.();
+  };
+
+  const pasteFromClipboard = async () => {
+    setError('');
+    onClearFetchError?.();
+    try {
+      if (!navigator.clipboard?.readText) {
+        setError('Clipboard is not available in this browser. Use Ctrl+V (or ⌘+V) in the field.');
+        return;
+      }
+      const text = (await navigator.clipboard.readText()).trim();
+      if (!text) {
+        setError('Clipboard is empty. Copy an Instagram link first.');
+        return;
+      }
+      setUrl(text);
+    } catch {
+      setError('Could not read clipboard. Allow paste permission or paste manually (Ctrl+V).');
+    }
   };
 
   return (
@@ -67,47 +94,76 @@ export function HeroSection({ onSubmit, isLoading }: HeroSectionProps) {
             className="max-w-3xl mx-auto"
           >
             <div className="relative">
-              <div className="flex flex-col md:flex-row gap-4 p-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg rounded-2xl shadow-2xl border border-gray-200/50 dark:border-gray-700/50">
-                <input
-                  type="text"
-                  value={url}
-                  onChange={(e) => {
-                    setUrl(e.target.value);
-                    setError('');
-                  }}
-                  placeholder="Paste Instagram URL here..."
-                  className="flex-1 px-6 py-4 bg-transparent text-gray-800 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 outline-none text-lg rounded-xl"
-                  disabled={isLoading}
-                />
-                <motion.button
-                  type="submit"
-                  disabled={isLoading}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-xl shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 min-w-[140px]"
-                >
-                  {isLoading ? (
-                    <>
-                      <Loader2 className="w-5 h-5 animate-spin" />
-                      Loading
-                    </>
-                  ) : (
-                    <>
-                      <Download className="w-5 h-5" />
-                      Download
-                    </>
+              <div className="flex flex-col md:flex-row gap-3 md:gap-4 p-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg rounded-2xl shadow-2xl border border-gray-200/50 dark:border-gray-700/50">
+                <div className="relative flex flex-1 items-center min-w-0">
+                  <input
+                    type="text"
+                    value={url}
+                    onChange={(e) => {
+                      setUrl(e.target.value);
+                      setError('');
+                      onClearFetchError?.();
+                    }}
+                    placeholder="Paste Instagram URL here..."
+                    className={`w-full py-4 bg-transparent text-gray-800 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 outline-none text-lg rounded-xl pl-6 ${url.trim() && !isLoading ? 'pr-12' : 'pr-6'}`}
+                    disabled={isLoading}
+                  />
+                  {url.trim() && !isLoading && (
+                    <button
+                      type="button"
+                      onClick={clearUrl}
+                      className="absolute right-2 p-2 rounded-lg text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-100 hover:bg-gray-200/80 dark:hover:bg-gray-700/80 transition-colors"
+                      aria-label="Clear URL"
+                      title="Clear"
+                    >
+                      <X className="w-5 h-5" />
+                    </button>
                   )}
-                </motion.button>
+                </div>
+                <div className="flex flex-row gap-2 md:gap-3 shrink-0">
+                  <motion.button
+                    type="button"
+                    disabled={isLoading}
+                    onClick={pasteFromClipboard}
+                    whileHover={{ scale: isLoading ? 1 : 1.02 }}
+                    whileTap={{ scale: isLoading ? 1 : 0.98 }}
+                    className="flex-1 md:flex-none px-5 py-4 rounded-xl font-semibold border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 bg-white/60 dark:bg-gray-800/60 hover:bg-gray-100 dark:hover:bg-gray-700/80 hover:border-gray-400 dark:hover:border-gray-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 min-w-0 md:min-w-[120px]"
+                    aria-label="Paste from clipboard"
+                    title="Paste from clipboard"
+                  >
+                    <ClipboardPaste className="w-5 h-5 shrink-0" />
+                    <span className="truncate">Paste</span>
+                  </motion.button>
+                  <motion.button
+                    type="submit"
+                    disabled={isLoading}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="flex-1 md:flex-none px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-xl shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 min-w-[140px]"
+                  >
+                    {isLoading ? (
+                      <>
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        Loading
+                      </>
+                    ) : (
+                      <>
+                        <Download className="w-5 h-5" />
+                        Download
+                      </>
+                    )}
+                  </motion.button>
+                </div>
               </div>
             </div>
 
-            {error && (
+            {(error || fetchError) && (
               <motion.p
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="mt-4 text-red-500 dark:text-red-400 text-sm font-medium"
               >
-                {error}
+                {error || fetchError}
               </motion.p>
             )}
           </motion.form>

@@ -69,20 +69,15 @@ export function ResultSection({ result, onClose }: ResultSectionProps) {
                       className="w-full h-full object-cover"
                     />
                   ) : (
-                    <div className="relative w-full h-full">
-                      <img
-                        src={result.thumbnail || result.url}
-                        alt="Video thumbnail"
-                        className="w-full h-full object-cover"
-                      />
-                      <div className="absolute inset-0 flex items-center justify-center bg-black/30">
-                        <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center">
-                          <Video className="w-8 h-8 text-gray-800" />
-                        </div>
-                      </div>
-                    </div>
+                    <video
+                      src={result.url}
+                      poster={result.thumbnail}
+                      controls
+                      playsInline
+                      className="w-full h-full object-cover"
+                    />
                   )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
 
                 <div className="flex flex-col justify-center gap-4">
